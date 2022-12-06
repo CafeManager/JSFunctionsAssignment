@@ -6,8 +6,12 @@ Examples:
     doubleValues([5,1,2,3,10]) // [10,2,4,6,20]
 
 */
-function doubleValues(arr){
-    
+function doubleValues(arr) {
+
+    let x = arr.map(function (value) {
+        return value *= 2;
+    })
+    return x;
 }
 
 /*
@@ -18,8 +22,12 @@ Examples:
     onlyEvenValues([5,1,2,3,10]) // [2,10]
 
 */
-function onlyEvenValues(arr){
-    
+function onlyEvenValues(arr) {
+
+    let x = arr.filter(function (value) {
+        return value % 2 === 0;
+    })
+    return x;
 }
 
 /*
@@ -30,8 +38,12 @@ Examples:
     showFirstAndLast(['hi', 'goodbye', 'smile']) // ['hi', 'ge', 'se']
 
 */
-function showFirstAndLast(arr){
-    
+function showFirstAndLast(arr) {
+
+    let x = arr.map(function (value) {
+        return `${value[0]}${value[value.length - 1]}`;
+    })
+    return x;
 }
 
 /*
@@ -43,8 +55,13 @@ Examples:
     // [{name: 'Elie', title:'instructor'}, {name: 'Tim', title:'instructor'}, {name: 'Matt', title:'instructor'}, {name: 'Colt', title:'instructor'}]
 
 */
-function addKeyAndValue(arr,key,value){
-    
+function addKeyAndValue(arr, key, value) {
+
+    let x = arr.map(function (myObj) {
+        myObj[key] = value
+        return myObj;
+    })
+    return x;
 }
 
 /*
@@ -57,8 +74,20 @@ Examples:
     vowelCount('hmmm') // {};
     vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
 */
-function vowelCount(str){
-   
+function vowelCount(str) {
+    let x = str.toLocaleLowerCase();
+    let vowelCount = {};
+    Array.from('aeiou').map(function (vowel) {
+        Array.from(str).map(function (char) {
+            if (char === vowel) {
+                if (vowelCount[vowel] === undefined) {
+                    vowelCount[vowel] = 0
+                }
+                vowelCount[vowel]++;
+            }
+        })
+    })
+    return vowelCount;
 }
 
 /*
@@ -69,7 +98,13 @@ Examples:
     doubleValuesWithMap([1,-2,-3]) // [2,-4,-6]
 */
 
-function doubleValuesWithMap(arr) {}
+function doubleValuesWithMap(arr) {
+
+    let x = arr.map(function (values) {
+        return values *= 2
+    })
+    return x;
+}
 
 /*
 Write a function called valTimesIndex which accepts an array and returns a new array with each value multiplied by the index it is currently at in the array.
@@ -79,8 +114,12 @@ Examples:
     valTimesIndex([1,-2,-3]) // [0,-2,-6]
 */
 
-function valTimesIndex(arr){
-    
+function valTimesIndex(arr) {
+
+    let x = arr.map(function (val, ind) {
+        return val * ind;
+    })
+    return x;
 }
 
 /*
@@ -90,8 +129,12 @@ Examples:
     extractKey([{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}], 'name') // ['Elie', 'Tim', 'Matt', 'Colt']
 */
 
-function extractKey(arr, key){
-    
+function extractKey(arr, key) {
+
+    let x = arr.map(function (val) {
+        return val[key];
+    })
+    return x;
 }
 
 /*
@@ -101,8 +144,12 @@ Examples:
     extractFullName([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia"}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele"}]) // ['Elie Schoppik', 'Tim Garcia', 'Matt Lane', 'Colt Steele']
 */
 
-function extractFullName(arr){
-    
+function extractFullName(arr) {
+
+    let x = arr.map(function (val) {
+        return val["first"].concat(" ", val["last"])
+    })
+    return x;
 }
 
 /*
@@ -112,7 +159,13 @@ Examples:
     filterByValue([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele", isCatOwner: true}], 'isCatOwner') // [{first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Colt', last:"Steele", isCatOwner: true}]
 */
 
-function filterByValue(arr, key) {}
+function filterByValue(arr, key) {
+
+    let x = arr.filter(function (val) {
+        return val[key] !== undefined;
+    })
+    return x;
+}
 
 /*
 Write a function called find which accepts an array and a value and returns the first element in the array that has the same value as the second parameter or undefined if the value is not found in the array.
@@ -122,7 +175,13 @@ Examples:
     find([1,2,3,4,5], 10) // undefined
 */
 
-function find(arr, searchValue) {}
+function find(arr, searchValue) {
+
+    let log = arr.filter(function (val, index) {
+        return val === searchValue
+    })
+    return log[0];
+}
 
 /*
 Write a function called findInObj which accepts an array of objects, a key, and some value to search for and returns the first found value in the array.
@@ -131,7 +190,15 @@ Examples:
     findInObj([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele", isCatOwner: true}], 'isCatOwner',true) // {first: 'Tim', last:"Garcia", isCatOwner: true}
 */
 
-function findInObj(arr, key, searchValue) {}
+function findInObj(arr, key, searchValue) {
+
+    let log = arr.filter(function (val, index) {
+        return val[key] !== undefined
+    }).filter(function (val, index) {
+        return val[key] == searchValue
+    })
+    return log[0]
+}
 
 /*
 Write a function called removeVowels which accepts a string and returns a new string with all of the vowels (both uppercased and lowercased) removed. Every character in the new string should be lowercased.
@@ -142,7 +209,19 @@ Examples:
     removeVowels('ZZZZZZ') // ('zzzzzz')
 */
 
-function removeVowels(str) {}
+function removeVowels(str) {
+
+    str = str.toLocaleLowerCase();
+    newStr = "";
+
+    let log = Array.from(str).filter(function (char) {
+        return "aeiou".indexOf(char) === -1;
+    }).map(function (val) {
+        newStr = newStr.concat(val);
+    })
+
+    return newStr;
+}
 
 /*
 Write a function called doubleOddNumbers which accepts an array and returns a new array with all of the odd numbers doubled (HINT - you can use map and filter to double and then filter the odd numbers).
@@ -152,4 +231,12 @@ Examples:
     doubleOddNumbers([4,4,4,4,4]) // []
 */
 
-function doubleOddNumbers(arr) {}
+function doubleOddNumbers(arr) {
+
+    let x = arr.filter(function (val) {
+        return val % 2 == 1;
+    }).map(function (val) {
+        return val *= 2;
+    })
+    return x;
+}
